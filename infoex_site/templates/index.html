@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<table border='1'>
+  <tr>
+    <td>code</td>
+    <td>name</td>
+    <td>time</td>
+    <td>量trade_volume</td>
+    <td>價格last_trade_price</td>
+    <td>總量accumulate_trade_volume</td>
+    <td>開盤</td>
+    <td>最高</td>
+    <td>最低</td>
+    <td>best_bid_volume</td>
+    <td>best_bid_price</td>
+    <td>best_ask_volume</td>
+    <td>best_ask_price</td>
+    <td>data</td>
+  </tr>
+  {% for obj in objs %}
+  <tr>
+    <td>{{ obj.code }}</td>
+    <td>{{ obj.fullname }}</td>
+    <td>{{ obj.time_desc }}</td>
+    <td>{{ obj.trade_volume }}</td>
+    <td>{{ obj.last_trade_price }}</td>
+    <td>{{ obj.accumulate_trade_volume }}</td>
+    <td>{{ obj.low }}</td>
+    <td>{{ obj.open }}</td>
+    <td>{{ obj.high }}</td>
+    <td>{{ obj.best_bid_volume }}</td>
+    <td>{{ obj.best_bid_price }}</td>
+    <td>{{ obj.best_ask_volume }}</td>
+    <td>{{ obj.best_ask_price }}</td>
+    <td>{{ obj }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+<script src="{% static 'js/canvasjs/canvasjs.min.js' %}"></script>
+<script>
+window.onload = function () {
+
+var chart = new CanvasJS.Chart("chartContainer", {
+  height: 640,
+  width: 1560,
+	animationEnabled: true,
+	theme: "light2",
+	title:{
+		text: "{{ equity.name }}{{ date_desc }}走勢圖"
+	},
+	axisY:{
+		includeZero: false
+	},
+	data: [{        
+		type: "line",       
+		dataPoints: {{ data_points }}
+	}]
+});
+chart.render();
+
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<div>
+<h2>{{ equity.name }}<span>{{equity.code}}</span></h2>
+</div>
+<p>
+<div id="chartContainer" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+</p>
+{% endblock %}

@@ -1,0 +1,78 @@
+/* PLACE YOU CUSTOM STYLES IN THIS FILE */
+.prizeLoge {
+    padding-left: 20px;
+}
+
+.prizeIcon {
+    width: 30px;
+}
+
+.nk-match-team-left .prizeTitle ul {
+    list-style-type: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.resultBox {
+    list-style-type: none;
+    width: 100%;
+    margin: 0;
+    padding-left: 20px;
+}
+
+.resultBox li {
+    display: inline;
+    padding: 3px;
+}
+
+.yellowWord {
+    color: #f7e50b;
+}
+.timeWord {
+    color: #f44a07;
+}
+
+
+.nk-nav-table a {
+    font-family: "Noto Sans TC", sans-serif
+}
+
+.prizeTitle {
+    font-size: 18px;
+}
+
+
+.prizeBoxStyle {
+    border-bottom-style: groove;
+    border-bottom-color: #2c70b5;
+    margin-top: 6px;
+}
+
+.newOpenPrizeBox {
+
+}
+/*歷史開獎列表*/
+.table td, .table th {
+    background-color: #353f566b;
+    font-size: 18px;
+    font-family: "Noto Sans TC", sans-serif
+}
+
+.table tbody td:nth-child(2) {
+    color: #f7e50b;
+}
+.table tbody td:nth-child(4) {
+    color: red;
+}
+
+.table tbody th {
+    color: azure;
+}
+
+.table thead th {
+    background-color: #002952;
+    color: azure;
+    border-color: #32383e;
+}
+

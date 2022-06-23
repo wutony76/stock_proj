@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+  <h3> TWSE 指數列表 ({{len}})</h3>
+  <br/>
+  <br/>
+
+
+  {% for k, v in rtn.items %}
+    <a href="{% url 'ig_exponent_info' %}?code={{k}}" >{{k}} - {{v}} <a/><br/>
+  {% endfor %}
+
+
+  <hr/>
+
+  {% for k, v in rtn2.items %}
+    <a href="{% url 'twse_exponent_info' %}?code={{k}}" >{{k}} - {{v}} <a/><br/>
+  {% endfor %}
+{% endblock %}

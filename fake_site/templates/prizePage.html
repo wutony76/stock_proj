@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+    
+
+        
+
+    <!-- START: 最新開獎 -->
+    <div class="newOpenPrize">
+        <div class="nk-match prizeBoxStyle">
+            <div class="nk-match-team-left">
+                <a href="#">
+                    <span class="nk-match-team-logo">
+                        <img class="prizeLoge" src="{% static 'assets/images/Stock/StockLogo.png' %}" alt="">
+                    </span>
+                    <span class="nk-match-team-name prizeTitle">
+                        <ul>
+                            <li>台股指數</li>
+                            <li><span class="yellowWord">{{ last_result.serial_number }}</span> 期</li>
+                        </ul>
+                    </span>
+                </a>
+            </div>
+            <div class="nk-match-team-left">
+                <ul class="resultBox">
+                  <li><img class="prizeIcon" src="{% static 'assets/images/Stock' %}/{{ last_result.result_img }}" alt=""></li>
+                  <li><img class="prizeIcon" src="{% static 'assets/images/Stock' %}/{{ last_result.result_odd_even }}" alt=""></li>
+                    
+                </ul>
+            </div>
+
+            <div class="nk-match-team-left">
+                <span class="nk-match-team-name prizeTitle">
+                        <ul>
+                            <li>下期 : <span class="yellowWord">20200226</span></li>
+                            <li>開獎倒數 : <span class="timeWord">01 分 20 秒</span></li>
+                        </ul>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+
+
+    <div class="nk-gap-2"></div>
+    <h3 class="nk-decorated-h-2"><span><span class="text-main-1">歷史</span> 開獎</span></h3>
+    <div class="nk-gap"></div>
+
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">日期</th>
+            <th scope="col">期數</th>
+            <th scope="col">結果</th>
+            <th scope="col">大盤指數</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for r in results %}
+          <tr>
+            <th scope="row">{{ r.date_desc }}</th>
+            <td>{{ r.serial_number }}</td>
+            <td>
+                <ul class="resultBox">
+                  <li><img class="prizeIcon" src="{% static 'assets/images/Stock' %}/{{ r.result_img }}" alt=""></li>
+                  <li><img class="prizeIcon" src="{% static 'assets/images/Stock' %}/{{ r.result_odd_even }}" alt=""></li>
+                </ul>
+            </td>
+            <td>
+                {{ r.end_number }}
+            </td>
+          </tr>
+          {% endfor %}
+          <tr>
+            <th scope="row">2020-02-25 13:30</th>
+            <td>20200225</td>
+            <td>
+                <ul class="resultBox">
+                    <li><img class="prizeIcon" src="assets/images/Stock/stockDown.jpg" alt=""></li>
+                    <li><img class="prizeIcon" src="assets/images/Stock/stockUp.jpg" alt=""></li>
+                    <li><img class="prizeIcon" src="assets/images/Stock/stockSingle.jpg" alt=""></li>
+                    <li><img class="prizeIcon" src="assets/images/Stock/stockDouble.jpg" alt=""></li>
+                </ul>
+            </td>
+            <td>
+                10152.5
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">2020-02-25 13:30</th>
+            <td>20200225</td>
+            <td>
+                <ul class="resultBox">
+                    <li><img class="prizeIcon" src="assets/images/Stock/stockDown.jpg" alt=""></li>
+                    <li><img class="prizeIcon" src="assets/images/Stock/stockUp.jpg" alt=""></li>
+                    <li><img class="prizeIcon" src="assets/images/Stock/stockSingle.jpg" alt=""></li>
+                    <li><img class="prizeIcon" src="assets/images/Stock/stockDouble.jpg" alt=""></li>
+                </ul>
+            </td>
+            <td>
+                10152.5
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    
+                
+{% endblock %}

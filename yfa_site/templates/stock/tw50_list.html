@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+  <h3> TW50 列表 ({{len}})</h3>
+  <a href="{% url 'refresh_tw50_list' %}"> 更新TW50列表 </a>
+
+  <br/>
+  <br/>
+  {% for item in rtn %}
+    <a href="{% url 'tw50_info' %}?code={{item.code}}" > {{item.code}} - {{item.name}} <a/><br/>
+  {% endfor %}
+
+
+  {% for item in rtn %}
+    {{item.code}}
+  {% endfor %}
+
+{% endblock %}

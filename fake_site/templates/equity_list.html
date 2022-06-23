@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<table border='1'>
+  <tr>
+    <td>code</td>
+    <td>cat_id</td>
+    <td>name</td>
+  </tr>
+  {% for obj in objs %}
+  <tr>
+    <td>{{ obj.code }}</td>
+    <td>{{ obj.cat_id }}</td>
+    <td>{{ obj.name }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% endblock %}

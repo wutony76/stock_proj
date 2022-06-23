@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- START: 最新開獎 -->
+<div class="nk-gap-2"></div>
+<h3 class="nk-decorated-h-2"><span><span class="text-main-1">最新</span> 開獎</span></h3>
+<div class="nk-gap"></div>
+
+{% for r in results %}
+<div class="newOpenPrize">
+    <div class="nk-match prizeBoxStyle">
+        <div class="nk-match-team-left">
+            <a href="#">
+                <span class="nk-match-team-logo">
+                    <img class="prizeLoge" src="{% static 'assets/images/Stock/StockLogo.png' %}" alt="">
+                </span>
+                <span class="nk-match-team-name prizeTitle">
+                    <ul>
+                        <li>台股指數</li>
+                        <li><span class="yellowWord">{{ r.date_desc }}</span> 期</li>
+                    </ul>
+                </span>
+            </a>
+        </div>
+        <div class="nk-match-team-left">
+            <ul class="resultBox">
+                <li><img class="prizeIcon" src="{% static 'assets/images/Stock' %}/{{ r.result_img }}" alt=""></li>
+                <li><img class="prizeIcon" src="{% static 'assets/images/Stock' %}/{{ r.result_odd_even }}" alt=""></li>
+            </ul>
+        </div>
+
+        <div class="nk-match-team-left">
+            <span class="nk-match-team-name prizeTitle">
+              {% if r.is_end == False %}
+                    <ul>
+                        <li>下期 : <span class="timeWord">20200225-001</span></li>
+                        <li>開獎倒數 : <span class="yellowWord">01 分 20 秒</span></li>
+                    </ul>
+              {% endif %}
+            </span>
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+{% endblock %}

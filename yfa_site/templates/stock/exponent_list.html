@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+  <h3> 指數列表 ({{len}})</h3>
+  <a href="{% url 'refresh_exponent_list' %}"> 更新-指數列表 </a>
+
+  <br/>
+  <br/>
+
+
+  {% for r in rtn %}
+    <a href="{% url 'exponent_info' %}?code={{r.code}}" >{{r.code}} - {{r.name}} <a/><br/>
+
+
+
+  {% endfor %}
+
+{% endblock %}

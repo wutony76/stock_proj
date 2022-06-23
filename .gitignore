@@ -1,0 +1,11 @@
+*.swp
+*.swo
+*.swn
+*.pyc
+data
+data/*
+packages
+packages/*
+sheet_site/db.sqlite3
+*/nohup.out
+nohup.out

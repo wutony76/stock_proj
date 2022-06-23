@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+  <h3> 股票列表 ({{len}})</h3>
+  <a href="{% url 'refresh_stock_list' %}"> 更新公司-股票列表 </a>
+
+  <br/>
+  <br/>
+
+
+  {% for r in rtn %}
+    <a href="{% url 'stock_info' %}?code={{r.code}}" >{{r.code}} - {{r.name}} <a/><br/>
+  {% endfor %}
+
+{% endblock %}

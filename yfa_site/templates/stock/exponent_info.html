@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% load static %}
+{% load web_extras %}
+
+{% block head %}
+  <script>
+    window.onload = function () {
+      var data_date = {{ data_date|safe }};
+      var data_volume = {{ data_volume|safe }};
+      var dataPoints = []; 
+      //dataPoints.forEach(function(item, index, array) {
+      //  console.log(item, index);
+      //});
+
+      for ( var i = 0; i < data_volume.length; i++ ) {
+        dataPoints.push({
+          x : data_date[i],
+          y : data_volume[i] 
+        });
+      }
+      console.log( dataPoints );
+
+      //var y = 1000;
+      //var limit = 50000;
+      //for ( var i = 0; i < limit; i++ ) {
+      //  y += Math.round( 10 + Math.random() * (-10 -10));	
+      //  dataPoints.push({x:" 9 / 1" ,y: y });
+      //  console.log({ y: y });
+      //}
+
+      var chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        zoomEnabled: true,
+        title:{
+          text: "Performance Demo with 50,000 Data Points"
+        }, 
+        subtitles:[{
+          text: "Try Zooming and Panning"
+        }],
+        axisX:{
+          title: "日期",
+          valueFormatString:"MM/DD hh:mm TT",
+          //valueFormatString:"YYYY/MM/DD hh:mm",
+          //interval:1, 
+        },
+        axisY:{
+          title: "成交量",
+          includeZero: false
+        },
+        data: [{
+          type: "line",
+          xValueType: "dateTime",
+          xValueFormatString: "MM/DD hh:mm TT",
+          dataPoints: dataPoints
+        }],
+      });
+      chart.render();
+    }
+
+  </script>
+{% endblock %}
+
+{% block content %}
+<h3> {{code}} 指數 </h3>
+<a href="{% url 'refresh_exponent_info' %}?code={{code}}"> 更新指數資訊 </a>
+
+  <br/>
+  <br/>
+
+
+  <table border="1">
+    <thead>
+      <tr>
+        <th>date</th>
+        <th>time</th>
+        <th>value</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for r in rtn %}
+      <tr>
+        <td>{% uts_to_date r.uts %}</td>
+        <td>{{r.time.0}}:{{r.time.1}}  </td>
+        <td>{{r.value}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+
+  <div id="chartContainer" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+
+  <script src="{% static 'js/canvasjs-3.4.1/canvasjs.min.js' %}"></script>
+{% endblock %}

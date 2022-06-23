@@ -1,0 +1,186 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title> ONLINE _ws_test </title>
+
+    <script src= "http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" type= "text/javascript" ></script>
+    <!--
+    <script src= "js/cszilla_conn.js" type= "text/javascript" ></script>
+    -->
+
+
+
+    <script type="text/javascript">
+
+      var index = 0;
+      var get_ts = 0;
+      var stock_ts = 0;
+      var now_ts = 0;
+
+      var get_select = null; 
+      var stock_select = null; 
+      var timer = null;
+
+      function newWsConn(ws, ws_url){
+        ws = new WebSocket(ws_url);
+        ws.onopen = function(evt) {
+          console.log("Connection open ...");
+          ws.send("is login.");
+
+          timer = setInterval(function() {
+            ws.send("hi~");
+          }, 10*1000);
+        };
+
+        ws.onmessage = function(e) {
+          var _data = e.data
+          console.log(_data);
+          var o_data = JSON.parse( _data );
+
+          //全部
+          /*
+          $("#data-input").append( "set:"+index+"--"+e.data+"\n" );
+          var psconsole2 = $('#data-input');
+          if(psconsole2.length){
+            psconsole2.scrollTop(psconsole2[0].scrollHeight - psconsole2.height());
+          }
+          */
+
+          index ++;
+          now_ts = o_data["ts"];
+
+
+          var d = new Date();
+          var n = d.getTime();
+
+          //指數
+          var e_select_v = $('#exponent-select').val(); //twse01
+          if(get_ts != now_ts || get_select != e_select_v ){
+            if( o_data["code"] == e_select_v ){
+              $("#cszilla-input").append( "now_ts:"+ n +"  set:"+index+"--"+e.data+"\n" );
+              get_ts = now_ts;
+              get_select = e_select_v;
+            }
+            // scrollTop 
+            var psconsole = $('#cszilla-input');
+            if(psconsole.length){
+              psconsole.scrollTop(psconsole[0].scrollHeight - psconsole.height());
+            }
+          }
+
+
+          //指數
+          var tw50_select_v = $('#tw50-select').val(); //2330
+          if(stock_ts != now_ts || stock_select != tw50_select_v ){
+            if( o_data["code"] == tw50_select_v ){
+              $("#tw50-input").append( "now_ts:"+ n +"  set:"+index+"--"+e.data+"\n" );
+              stock_ts = now_ts;
+              stock_select = tw50_select_v;
+            }
+            // scrollTop 
+            var psconsole = $('#tw50-input');
+            if(psconsole.length){
+              psconsole.scrollTop(psconsole[0].scrollHeight - psconsole.height());
+            }
+          }
+        };
+
+        return ws;
+      }
+
+      $(function() {
+        console.log("ONLINE -start to get push DINO-DIGIT data.");
+        var ws;
+        //var ws = new WebSocket("ws://3.115.201.240:17500");
+        ws = newWsConn(ws, "ws://35.75.172.197:17500");
+        
+
+        $('#conn_button').click(function(){
+          console.log("new-conn");
+          ws.close();
+
+          var ws_url = $('#data_source').val();
+          console.log("new-ws = "+ ws_url);
+          //ws = new WebSocket(ws_url);
+          ws = newWsConn(ws, ws_url);
+        });
+
+        $('#close_button').click(function(){
+          console.log("close");
+          if (timer != null){
+            clearInterval(timer);
+          }
+          ws.close();
+        });
+
+      });
+      
+    </script>
+    
+  </head>
+
+  <body>
+    <h1> (TEST)接收 數據推送  </h1>
+
+    <div id="log-box"> </div>
+
+    <div class="cszilla-contact-container">
+      <div class="cszilla-contact-message"> </div>
+      <div id="customer_message">
+        <select id="data_source" size="1">
+          <option>請選擇 --資料數據來源--</option>
+          <option value ="ws://35.75.172.197:17500">正式來源 (東京)</option>
+          <option value ="ws://3.115.201.240:17500" selected>備源1 (東京)</option>
+        </select>
+
+        <button id="conn_button" type="button">重新連線</button>
+        <button id="close_button" type="button">關閉</button>
+      </div>
+
+      <!--
+      <div>
+        <textarea id="data-input" name="data" rows="10" cols="80" required> hello </textarea>
+      </div>
+      -->
+
+
+      <br/>
+
+      <div>
+        指數:
+        <select id="exponent-select">
+          <option>請選擇</option>
+          <option value ="twse01" selected>發行量加權股價指數</option>
+          <option value ="twse02">未含金融保險股指數</option>
+          <option value ="twse03">未含電子股指數</option>
+          <option value ="twse04">未含金融電子股指數</option>
+        </select>
+        <br/>
+        <br/>
+        <textarea id="cszilla-input" name="data" rows="8" cols="80" required> hello </textarea>
+      </div>
+
+      <br/>
+      <br/>
+
+      <div>
+        tw50 個股:
+        <select id="tw50-select">
+          <option>請選擇</option>
+
+          <option value ="2330" selected>2330 - 台積電</option>
+          <option value ="1216">1216 - 統一</option>
+          <option value ="2317">2317 - 鴻海</option>
+          <option value ="2308">2308 - 台達電</option>
+        </select>
+        <br/>
+        <br/>
+        <textarea id="tw50-input" name="data" rows="8" cols="80" required> hello </textarea>
+      </div>
+    </div>
+    
+
+  </body>
+</html>

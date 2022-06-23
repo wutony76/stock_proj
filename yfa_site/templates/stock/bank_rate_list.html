@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+  <h3> BANK_TAIWAN_RATE</h3>
+  <br/>
+  <br/>
+
+  {% for k, v in rtn.items %}
+    <a href="{% url 'bank_info' %}?code={{k}}" >{{k}} - {{v.name}} <a/><br/>
+  {% endfor %}
+
+{% endblock %}

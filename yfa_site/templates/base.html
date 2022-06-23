@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+{% block head %}
+{% endblock %}
+</head>
+<body>
+  -menu-
+  <!-- <a href="{% url 'stock_list' %}">股票列表</a>|  -->
+  <!-- <a href="{% url 'exponent_list' %}">指數列表</a>| -->
+
+  <a href="{% url 'twse_exponent_list' %}">證卷指數列表</a> |
+  <a href="{% url 'tw50_list' %}">TW50 STOCK列表</a> |
+  <a href="{% url 'bank_list' %}">BANK 列表</a> |
+
+
+  <!--
+  <a href="{% url 'twse_exponent_list' %}">電子類指數及金融保險類指數列表</a>|
+  <a href="{% url 'twse_exponent_list' %}">電子類報酬指數及金融保險類報酬指數列表</a>|
+  <a href="{% url 'ig_exponent_list' %}">IG指數列表</a>
+  -->
+
+  --
+  <!--
+  <a href="{% url 'update_stock_info' %}">更新股票資訊</a>|
+  <a href="{% url 'update_exponent_info' %}">更新指數資訊</a>|
+  <a href="{% url 'update_twse_exponent_info' %}">更新證卷指數資訊</a>|  <!-- 證卷行5s刷新 -->
+  -->
+
+  <a href="{% url 'update_yahoo_exponent_info' %}">更新YAHOO證卷指數資訊</a>|  <!-- yahoo 證卷行刷新 -->
+  <a href="{% url 'update_tw50_info' %}">更新TW50 INFO</a>|  <!-- tw50刷新 -->
+  <a href="{% url 'update_bank_info' %}">更新 Bank_rate INFO</a>|  <!-- bank rate刷新 -->
+
+
+<!--
+  <a href="{% url 'update_twse_exponent_info_eftri' %}">更新電子類指數及金融保險類指數</a>|
+  <a href="{% url 'update_twse_exponent_info_other' %}">更新證卷其他指數資訊</a>
+  <a href="{% url 'update_ig_exponent_info' %}">更新IG指數資訊</a>
+-->
+
+  -menu end.-
+{% block content %}
+{% endblock %}
+</body>
+</html>
